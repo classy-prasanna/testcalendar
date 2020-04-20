@@ -3398,11 +3398,9 @@ function calendar_get_view(\calendar_information $calendar, $view, $includenavig
             true,
             true,
             function ($event) {
-                global $PAGE;
                 if ($proxy = $event->get_course_module()) {
                     $cminfo = $proxy->get_proxied_instance();
-                    // print_r($cminfo->get_userid() );                    
-                    return true; // ($cminfo->uservisible || $event->get_user() == $USER->id );
+                    return $cminfo->uservisible;
                 }
 
                 if ($proxy = $event->get_category()) {

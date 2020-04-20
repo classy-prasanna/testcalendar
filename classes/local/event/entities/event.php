@@ -192,7 +192,6 @@ class event implements event_interface {
     public function get_user() {
         return $this->user;
     }
-   
 
     public function get_type() {
         return $this->type;

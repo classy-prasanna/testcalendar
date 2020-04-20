@@ -158,16 +158,7 @@ class container {
                     // 2) Only process modules for courses a user has the capability to view OR they are enrolled in.
                     // 3) Only process modules for courses that are visible OR if the course is not visible, the user
                     //    has the capability to view hidden courses.
-                    /*if (!$cm->uservisible || () ) {
-                        return true;
-                    }*/
-                    // global $USER;
-
-                    if ( !$cm->uservisible && $dbrow->userid != $requestinguserid ) {
-                        return true;
-                    }
-                    
-                    if ($dbrow->userid && is_siteadmin() && $dbrow->userid != $requestinguserid ) {
+                    if (!$cm->uservisible) {
                         return true;
                     }
 

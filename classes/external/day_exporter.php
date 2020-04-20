@@ -151,11 +151,6 @@ class day_exporter extends exporter {
                 'type' => PARAM_BOOL,
                 'default' => false,
             ],
-            // LMSACE Completion.
-            'completion' => [
-                'type' => PARAM_BOOL,
-                'default' => false,
-            ],
         ];
     }
 
@@ -218,26 +213,7 @@ class day_exporter extends exporter {
         $return['calendareventtypes'] = array_values(array_unique($return['calendareventtypes']));
 
         $return['haslastdayofevent'] = false;
-
-        global $USER; // LMSACE
         foreach ($return['events'] as $event) {
-            // LMSACE Customization.
-            if ($event->instance != '') {
-                $course = $event->course;
-                $completioninfo = new \completion_info($course);
-                $mods = get_fast_modinfo($course);
-                $mod = $mods->get_cm($event->instance);               
-                $completion = $completioninfo->is_enabled($mod);
-                // print_object($mod->id);
-                if ($completion != COMPLETION_TRACKING_NONE) {
-                     $completiondata = $completioninfo->get_data($mod, false, $USER->id);
-                     if ($completiondata->completionstate) {
-                        $return['completion'] = true;
-                     }
-                }
-            }
-            // E.O LMSACE Customize.          
-            
             if ($event->islastday) {
                 $return['haslastdayofevent'] = true;
                 break;

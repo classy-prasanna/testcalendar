@@ -998,10 +998,7 @@ class core_calendar_external extends external_api {
         ]);
 
         $context = \context_user::instance($USER->id);
-        
-        if ($PAGE->pagetype != 'enrol-index') {
-            self::validate_context($context);
-        }
+        self::validate_context($context);
         $PAGE->set_url('/calendar/');
 
         $type = \core_calendar\type_factory::get_calendar_instance();
